@@ -3,18 +3,18 @@
  */
 export const element = {
     searchForm: document.querySelector('.search'),
-searchInput : document.querySelector('.search__field'),
+    searchInput: document.querySelector('.search__field'),
     searchResult: document.querySelector('.results'),
     searchResultList: document.querySelector('.results__list'),
-    searchResultPage : document.querySelector('.results__pages')
+    searchResultPage: document.querySelector('.results__pages')
 }
 
-export const elementStrings ={
+export const elementStrings = {
     loader: 'loader'
 }
 
 
-export const renderLoader = parent =>{
+export const renderLoader = parent => {
     const loader = `
         <div class="${elementStrings.loader}">
             <svg>
@@ -26,8 +26,8 @@ export const renderLoader = parent =>{
     parent.insertAdjacentHTML('afterbegin', loader);
 };
 
-export const clearLoader = ()=>{
+export const clearLoader = ()=> {
     const loader = document.querySelector(`.${elementStrings.loader}`)
-    if(loader) loader.parentElement.removeChild(loader)
+    if (loader) loader.parentElement.removeChild(loader)
 
 }

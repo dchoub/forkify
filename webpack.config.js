@@ -21,13 +21,12 @@ var baseConfig = {
 
     ],
 
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use:
-                {
+                use: {
                     loader: 'babel-loader'
                 }
             }
