@@ -40,6 +40,7 @@ export default class recipe{
 
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitsShort, 'kg', 'g'];
         const newIngredients = this.ingredients.map(el =>{
             //uniform the ingredients
             let ingredient = el.toLowerCase();
@@ -52,7 +53,7 @@ export default class recipe{
 
             //parse ingreditenst into count, units and ingredients
             const arrIng =ingredient.split(' ');
-            const unitIndex = arrIng.findIndex(el2=> unitsShort.includes(el2));
+            const unitIndex = arrIng.findIndex(el2=> units.includes(el2));
             let objIng;
 
             if(unitIndex>-1){
@@ -60,7 +61,7 @@ export default class recipe{
 
                 const arrCount = arrIng.slice(0, unitIndex);
                 let count;
-                if(arrCount.length ===1){
+                if(arrCount.length === 1){
                     count = eval(arrIng[0].replace('-', '+'));
                 }
                 else{
@@ -69,7 +70,7 @@ export default class recipe{
                 objIng ={
                     count,
                     unit: arrIng[unitIndex],
-                    ingredient: arrIng.slice(unitIndex+1).join(' ')
+                    ingredient: arrIng.slice(unitIndex + 1).join(' ')
                 };
 
             }
@@ -87,12 +88,11 @@ export default class recipe{
                 objIng ={
                     count:1,
                     unit:'',
-                ingredient
+                    ingredient
 
                 }
-
             }
-            return objIng
+            return objIng;
         });
         this.ingredients = newIngredients;
 
