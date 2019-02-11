@@ -58,16 +58,21 @@ element.searchResultPage.addEventListener('click', e => {
 
 const controlRecipe = async()=>
 {
-    //prepare UI
-    recipeView.clearRecipe();
-    renderLoader(element.recipe)
+
     //get The id
     const id = window.location.hash.replace('#', '');
+
+
     //call the getRecipe function
     if(id){
+        //prepare UI
         recipeView.clearRecipe();
-        clearLoader();
+        renderLoader(element.recipe)
 
+        // Highlight selected search item
+        if (state.search) searchView.highlightSelected(id);
+
+        // Create new recipe object
         state.receipe = new Recipe(id);
         try{
             // Get recipe data and parse ingredients
@@ -93,6 +98,27 @@ const controlRecipe = async()=>
 
 
 
-['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe))
+
+elements.recipe.addEventListener('click', e => {
+    if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+        // Decrease button is clicked
+        if (state.recipe.servings > 1) {
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsIngredients(state.recipe);
+        }
+    } else if (e.target.matches('.btn-increase, .btn-increase *')) {
+        // Increase button is clicked
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
+    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+        // Add ingredients to shopping list
+      //  controlList();
+    } else if (e.target.matches('.recipe__love, .recipe__love *')) {
+        // Like controller
+       // controlLike();
+    }
+});
+
 
 
