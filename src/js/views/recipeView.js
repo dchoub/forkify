@@ -67,7 +67,7 @@ export const renderRecipe = recipe => {
                 <svg class="recipe__info-icon">
                     <use href="img/icons.svg#icon-man"></use>
                 </svg>
-                <span class="recipe__info-data recipe__info-data--people">${recipe.serving}</span>
+                <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
@@ -98,7 +98,7 @@ export const renderRecipe = recipe => {
             ${recipe.ingredients.map(el =>createIngredient(el)).join('')}
             </ul>
 
-            <button class="btn-small recipe__btn">
+            <button class="btn-small recipe__btn recipe__btn--add">
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-shopping-cart"></use>
                 </svg>
