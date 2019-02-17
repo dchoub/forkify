@@ -33,7 +33,7 @@ export default class recipe{
     }
 
     calcServing(){
-        this.serving = 4;
+        this.servings = 5;
     }
 
     parseIngredients(){
@@ -95,6 +95,7 @@ export default class recipe{
             return objIng;
         });
         this.ingredients = newIngredients;
+
 
 
     }
