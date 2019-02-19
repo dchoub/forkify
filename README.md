@@ -16,7 +16,7 @@
 Followed the MVC architecture and created seperate folders for Model, View  and index.js as controller file.
 
 # Functionality  
- - Search the recipe by calling https://www.food2fork.com API 
+ - Search the recipe by calling https://www.food2fork.com API (used axios module for calling api)
  - Show the 10 recipe per page and add pagination accordinly
  - Show Spinner while page is loading
  - Select the recipe and show the details view
