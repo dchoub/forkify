@@ -8,7 +8,10 @@ export const element = {
     searchResultList: document.querySelector('.results__list'),
     searchResultPage: document.querySelector('.results__pages'),
     recipe: document.querySelector('.recipe'),
-    shopping: document.querySelector('.shopping__list')
+    shopping: document.querySelector('.shopping__list'),
+    likesMenu: document.querySelector('.likes__field'),
+    likeslist: document.querySelector('.likes__list'),
+
 }
 
 export const elementStrings = {

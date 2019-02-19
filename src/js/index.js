@@ -4,10 +4,12 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Like from './models/Likes';
 import{element, renderLoader, clearLoader} from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
-import * as listView from './views/listView'
+import * as listView from './views/listView';
+import * as likeView from './views/likesView'
 
 const state = {};
 
@@ -85,7 +87,7 @@ const controlRecipe = async()=>
             state.receipe.calcTime();
             // Render recipe
             clearLoader();
-            recipeView.renderRecipe(state.receipe);
+            recipeView.renderRecipe(state.receipe, state.likes.isLiked(id));
 
         }
         catch(err){
@@ -139,6 +141,47 @@ const controlList = () =>{
     });
 
 };
+state.likes = new Like();
+
+const controlLike =()=>{
+
+    if(!state.likes) state.likes = new Like();
+    const currentID = state.receipe.id;
+
+// /user has not liked current recipe
+    if(!state.likes.isLiked(currentID)){
+        //add like to state
+        const newLikes = state.likes.addlike(
+            currentID,
+            state.receipe.title,
+            state.receipe.author,
+            state.receipe.img
+        );
+        //toggle the like button
+        likeView.toggleLikeBtn(true);
+
+        //Add the like to UI
+        likeView.renderLike(newLikes);
+
+    }
+    //user has liked the current receipe
+    else{
+        //remove like to state
+        state.likes.deleteLike(currentID);
+
+        //toggle the like button
+        likeView.toggleLikeBtn(false);
+
+        //Remove the like to UI
+        likeView.deleteLike(currentID);
+
+    }
+
+    likeView.toggleLikeMenu(state.likes.getNumLikes());
+
+
+
+};
 
 
 element.recipe.addEventListener('click', e => {
@@ -157,7 +200,7 @@ element.recipe.addEventListener('click', e => {
        controlList();
     } else if (e.target.matches('.recipe__love, .recipe__love *')) {
         // Like controller
-       // controlLike();
+       controlLike();
     }
 });
 
