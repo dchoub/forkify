@@ -34,12 +34,12 @@ const controlSearch = async() => {
             searchView.renderResult(state.search.results)
         }
         catch(err){
-            console.log(err)
+            console.log(err);
             clearLoader();
         }
 
     }
-}
+};
 
 
 element.searchForm.addEventListener('submit', e => {
@@ -132,8 +132,8 @@ const controlList = () =>{
             listView.deleteItem(id);
 
             // Handle the count update
-        } else if (e.target.matches('.shopping__count-value')) {
-            const val = parseFloat(e.target.value, 10);
+        } else if (el.target.matches('.shopping__count-value')) {
+            const val = parseFloat(el.target.value, 10);
             state.list.updateCount(id, val);
         }
 
@@ -141,7 +141,7 @@ const controlList = () =>{
     });
 
 };
-state.likes = new Like();
+
 
 const controlLike =()=>{
 
@@ -182,6 +182,20 @@ const controlLike =()=>{
 
 
 };
+//Restore liked recipes on page load
+window.addEventListener('load', ()=>{
+    state.likes = new Like();
+
+    //Restore likes
+    state.likes.readStorage();
+
+    //toggle like menu icon
+    likeView.toggleLikeMenu(state.likes.getNumLikes());
+
+    //Render the existing likes
+    state.likes.likes.forEach(like => likeView.renderLike(like))
+
+});
 
 
 element.recipe.addEventListener('click', e => {
